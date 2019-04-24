@@ -4,18 +4,8 @@ using Unity.Entities;
 
 namespace ECS.System.Input
 {
-[DisableAutoCreation]	public class PlayerUseSystem : ComponentSystem
+	public class PlayerUseSystem : ComponentSystem
 	{
-		protected struct Input
-		{
-			public InputUseComponent inputUseComponent;
-		}
-		protected struct Artifact
-		{
-			public ArtifactComponent artifactComponent;
-			public ArtifactUsingComponent artifactUsingComponent;
-		}
-		
 		protected override void OnUpdate()
 		{
 			bool use1ButtonDown = false;

@@ -12,19 +12,6 @@ namespace ECS.System.Artifacts
 {
 [DisableAutoCreation]	public class HasteArtifactSystem : ComponentSystem
 	{
-		protected struct Artifact
-		{
-			
-		}
-		protected struct Camera
-		{
-			
-		}
-		protected struct Player
-		{
-			public PlayerTag playerTag;
-			public MovingComponent movingComponent;
-		}
 		protected override void OnUpdate()
 		{
 			bool isActive = false;
@@ -63,7 +50,7 @@ namespace ECS.System.Artifacts
 			if (!isSpeedChange) return;
 
 			Entities.ForEach((Entity e,
-				ref CameraComponent cameraComponent,
+				ref CameraTag cameraComponent,
 				ref MovingComponent movingComponent) =>
 			{
 				float speed = movingComponent.speed;

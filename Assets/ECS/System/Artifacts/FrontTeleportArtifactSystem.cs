@@ -1,6 +1,7 @@
 using ECS.Component;
 using ECS.Component.Artifacts;
 using ECS.Component.Artifacts.Common;
+using ECS.Component.Creatures;
 using ECS.Component.Flags;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -10,7 +11,7 @@ using NotImplementedException = System.NotImplementedException;
 
 namespace ECS.System.Artifacts
 {
-[DisableAutoCreation]    public class FrontTeleportArtifactSystem : ComponentSystem
+   public class FrontTeleportArtifactSystem : ComponentSystem
     {
         protected override void OnUpdate()
         {
@@ -18,10 +19,11 @@ namespace ECS.System.Artifacts
             float3 up = new float3();
             Entities.ForEach((Entity e,
                 ref PlayerTag playerTag,
-                ref Translation translation) =>
+                ref Translation translation,
+                ref Rotation rotation) =>
             {
                 position = translation.Value;
-                up = math.up();
+                up = math.forward(rotation.Value);
             });
 
             float3 location = new float3();
@@ -38,7 +40,7 @@ namespace ECS.System.Artifacts
 
                 float distance = frontTeleportArtifactSystem.distance;
                 
-                location = position + new float3(up * distance);
+                location = position + up * distance;
                                   
                 cooldownComponent.isReloadNeeded = true;
                 artifactUsingComponent.canUse = false;
@@ -49,10 +51,10 @@ namespace ECS.System.Artifacts
 
             if(!canUse) return;
             Entities.ForEach((Entity e,
-                ref CameraComponent cameraComponent,
+                ref CameraTag cameraComponent,
                 ref Translation translation) =>
             {
-                translation.Value = new float3(location.xy,translation.Value.z);
+                translation.Value = new float3(location.x,translation.Value.y, location.z);
             });
                 
             

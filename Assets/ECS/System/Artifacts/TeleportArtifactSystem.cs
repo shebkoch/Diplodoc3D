@@ -10,7 +10,7 @@ using NotImplementedException = System.NotImplementedException;
 
 namespace ECS.System.Artifacts
 {
-[DisableAutoCreation]	public class TeleportArtifactSystem : ComponentSystem
+	public class TeleportArtifactSystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{

@@ -137,8 +137,8 @@
     <Compile Include="Assets\ECS\Component\Enemy\EnemyGeneratorComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Enemy\ExplodeEnemyComponent.cs" />
     <Compile Include="Assets\ECS\Component\Enemy\ExplodeEnemyComponentProxy.cs" />
-    <Compile Include="Assets\ECS\Component\Flags\CameraComponent.cs" />
-    <Compile Include="Assets\ECS\Component\Flags\CameraComponentProxy.cs" />
+    <Compile Include="Assets\ECS\Component\Flags\CameraTag.cs" />
+    <Compile Include="Assets\ECS\Component\Flags\CameraTagProxy.cs" />
     <Compile Include="Assets\ECS\Component\Flags\EnemyTag.cs" />
     <Compile Include="Assets\ECS\Component\Flags\EnemyTagProxy.cs" />
     <Compile Include="Assets\ECS\Component\Flags\PlayerBulletComponent.cs" />

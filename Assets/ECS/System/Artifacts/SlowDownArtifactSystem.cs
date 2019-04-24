@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace ECS.System.Artifacts
 {
-[DisableAutoCreation]	public class SlowDownArtifactSystem : ComponentSystem
+	public class SlowDownArtifactSystem : ComponentSystem
 	{
-		private bool isStarted; //todo
 		protected override void OnUpdate()
 		{
+			
 			Entities.ForEach((Entity e,
 				ref SlowDownArtifact slowDownArtifact,
 				ref DurationComponent durationComponent,
@@ -22,14 +22,13 @@ namespace ECS.System.Artifacts
 				bool isEnd = durationComponent.isEnd;
 				if (canUse)
 				{
-					isStarted = true;
 					Time.timeScale = slowDownArtifact.slow;
 					cooldownComponent.isReloadNeeded = true;
 					artifactUsingComponent.canUse = false;
 					durationComponent.isStartNeeded = true;
 				}
 
-				if (isStarted && isEnd)
+				if (isEnd)
 				{
 					Time.timeScale = 1;
 				}

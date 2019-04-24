@@ -10,7 +10,7 @@ using Random = Unity.Mathematics.Random;
 
 namespace ECS.System
 {
-[DisableAutoCreation]	public class DurationSystem : JobComponentSystem
+	public class DurationSystem : JobComponentSystem
 	{
 		[BurstCompile]
 		struct Job : IJobForEach<DurationComponent>

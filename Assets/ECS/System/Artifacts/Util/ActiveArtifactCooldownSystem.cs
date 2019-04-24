@@ -4,7 +4,7 @@ using Unity.Entities;
 
 namespace ECS.System.Artifacts.Util
 {
-[DisableAutoCreation]	public class ActiveArtifactCooldownSystem : ComponentSystem
+	public class ActiveArtifactCooldownSystem : ComponentSystem
 	{
 
 		protected override void OnUpdate(){

@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace ECS.Component.Flags
 {
-	public struct CameraComponent : IComponentData
+	public struct CameraTag : IComponentData
 	{
 		public bool isEnable;
 	}
