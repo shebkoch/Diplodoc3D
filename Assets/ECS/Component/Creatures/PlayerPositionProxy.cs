@@ -1,14 +1,13 @@
 using Unity.Entities;
 using UnityEngine;
 
-namespace ECS.Component.Artifacts
+namespace ECS.Component.Creatures
 {
-	public class StoneGazeArtifactProxy : MonoBehaviour, IConvertGameObjectToEntity
+	public class PlayerPositionProxy : MonoBehaviour, IConvertGameObjectToEntity
 	{
-
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
-			var data = new StoneGazeArtifact
+			var data = new PlayerPosition
 			{
 			};
 			dstManager.AddComponentData(entity, data);

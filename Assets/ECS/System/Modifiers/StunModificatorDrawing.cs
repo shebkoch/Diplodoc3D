@@ -3,6 +3,7 @@ using Unity.Entities;
 
 namespace ECS.System.Modifiers
 {
+	//TODO
 [DisableAutoCreation]	public class StunModificatorDrawing : ComponentSystem
 	{
 
@@ -11,7 +12,7 @@ namespace ECS.System.Modifiers
 			Entities.ForEach((Entity e,
 				ref StunModificatorComponent stunModificatorComponent) =>
 			{
-				stunModificatorComponent.indicator.fillAmount = stunModificatorComponent.fillAmount;
+//				stunModificatorComponent.indicator.fillAmount = stunModificatorComponent.fillAmount;
 			});
 		}
 	}

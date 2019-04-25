@@ -9,7 +9,7 @@ namespace ECS.Component.Modificators
 		public bool isEnable;
 		public float last;
 
-		public Image indicator;
+//		public Image indicator;
 		public float fillAmount;
 	}
 }

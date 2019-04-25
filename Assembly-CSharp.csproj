@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -125,6 +125,8 @@
     <Compile Include="Assets\ECS\Component\Creatures\MovingComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\ParametersComponent.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\ParametersComponentProxy.cs" />
+    <Compile Include="Assets\ECS\Component\Creatures\PlayerPosition.cs" />
+    <Compile Include="Assets\ECS\Component\Creatures\PlayerPositionProxy.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\RotationComponent.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\RotationComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Damage\DamageComponent.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="Assets\ECS\Component\Items\PickUpMeleeComponent.cs" />
     <Compile Include="Assets\ECS\Component\Items\PickUpRangedComponent.cs" />
     <Compile Include="Assets\ECS\Component\Modificators\StunModificatorComponent.cs" />
+    <Compile Include="Assets\ECS\Component\Modificators\StunModificatorComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Modifiers\ModifierComponent.cs" />
     <Compile Include="Assets\ECS\Component\Modifiers\ModifierState.cs" />
     <Compile Include="Assets\ECS\Component\Modifiers\PoisonModifier.cs" />
@@ -196,7 +199,6 @@
     <Compile Include="Assets\ECS\System\Artifacts\LuckArtifactSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\PhaseArtifactSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\SlowDownArtifactSystem.cs" />
-    <Compile Include="Assets\ECS\System\Artifacts\StartArtifactDistributionSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\StoneGazeArtifactSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\TeleportArtifactSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\Util\ActiveArtifactCooldownSystem.cs" />
@@ -225,10 +227,12 @@
     <Compile Include="Assets\ECS\System\Modifiers\StunModifierSystem.cs" />
     <Compile Include="Assets\ECS\System\MouseControllerSystem.cs" />
     <Compile Include="Assets\ECS\System\MovingSystem.cs" />
+    <Compile Include="Assets\ECS\System\PlayerPositionSystem.cs" />
     <Compile Include="Assets\ECS\System\Relations\PlayerFollowSystem.cs" />
     <Compile Include="Assets\ECS\System\RotationSystem.cs" />
     <Compile Include="Assets\ECS\System\SpawnSystem.cs" />
     <Compile Include="Assets\ECS\System\Stats\PlayerParametersStatSystem.cs" />
+    <Compile Include="Assets\ECS\System\TestCollisionSystem.cs" />
     <Compile Include="Assets\Scripts\ArtifactBoot.cs" />
     <Compile Include="Assets\Scripts\Boot.cs" />
     <Compile Include="Assets\Scripts\DictionaryExtensions.cs" />
@@ -249,6 +253,7 @@
     <Compile Include="Assets\Scripts\UI\UIBullet.cs" />
     <Compile Include="Assets\Scripts\UI\UIHealth.cs" />
     <Compile Include="Assets\Scripts\UI\UIShowArtifacts.cs" />
+    <None Include="Assets\Models\MeleeWeapon\Read-Me.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -306,6 +311,9 @@
     <Reference Include="Unity.Timeline">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Rendering.Hybrid">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Rendering.Hybrid.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Physics.Hybrid">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Physics.Hybrid.dll</HintPath>
     </Reference>
@@ -353,9 +361,6 @@
     </Reference>
     <Reference Include="Unity.Transforms.Hybrid">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rendering.Hybrid">
-      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Rendering.Hybrid.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -18,8 +18,6 @@ namespace ECS.Component.Flags
 
 		private void LateUpdate()
 		{
-			
-			Debug.Log(Time.timeScale);
 			Translation translation = World.Active.EntityManager.GetComponentData<Translation>(cameraEntity);
 			transform.position = translation.Value;
 		}

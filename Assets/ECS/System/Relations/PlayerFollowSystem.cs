@@ -11,13 +11,8 @@ namespace ECS.System.Relations
 	{
 		protected override void OnUpdate()
 		{
-			float3 position = new float3();
-			Entities.ForEach((Entity e,
-				ref PlayerTag playerTag,
-				ref Translation translation) =>
-			{
-				position = translation.Value;
-			});
+			float3 position = GetSingleton<PlayerPosition>().position;
+
 			Entities.ForEach((Entity e,
 				ref PlayerFollowComponent playerFollowComponent,
 				ref Translation translation,

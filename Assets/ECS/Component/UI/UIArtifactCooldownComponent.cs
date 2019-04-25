@@ -1,11 +1,13 @@
 using Unity.Entities;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ECS.Component.UI
 {
-	public struct UIArtifactCooldownComponent : IComponentData
+	public class UIArtifactCooldownComponent : MonoBehaviour
 	{
 		public Image cooldownImage;
-		public byte id;
+		public Entity entity;
+		public byte index;
 	}
 }

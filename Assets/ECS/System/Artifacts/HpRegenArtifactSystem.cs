@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace ECS.System.Artifacts
 {
-[DisableAutoCreation]	public class HpRegenArtifactSystem : ComponentSystem
+	public class HpRegenArtifactSystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{

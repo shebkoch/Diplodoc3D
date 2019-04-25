@@ -10,26 +10,10 @@ using UnityEngine;
 namespace ECS.System.Attack.PreAttack
 {
 [DisableAutoCreation]	public class AroundShotPreAttackSystem : ComponentSystem
-	{
-		protected struct Player
-		{
-			public PlayerTag playerTag;
-			public Transform transform;
-		}
-		protected struct PreAttack
-		{
-			public PreAttackComponent preAttackComponent;
-		}
-
+{
 		protected override void OnUpdate()
 		{
-			float3 position = new float3();
-			Entities.ForEach((Entity e,
-				ref PlayerTag playerTag,
-				ref Translation translation) =>
-			{
-				position = translation.Value;
-			});
+			float3 position = GetSingleton<PlayerPosition>().position;
 			Entities.ForEach((Entity e,
 				ref PreAttackComponent preAttackComponent) =>
 			{

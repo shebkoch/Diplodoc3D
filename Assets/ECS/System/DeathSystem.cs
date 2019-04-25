@@ -3,6 +3,7 @@ using ECS.Component;
 using ECS.Component.Damage;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using UnityEngine;
 
 namespace ECS.System
@@ -16,6 +17,10 @@ namespace ECS.System
 			{
 				if(deathComponent.isDeathNeed)
 					PostUpdateCommands.DestroyEntity(e);
+			});
+			Entities.ForEach((Entity e,
+				ref PhysicsCollider physicsCollider) =>
+			{
 			});
 		}
 	}
