@@ -34,7 +34,7 @@ namespace DefaultNamespace.UI
 				{
 					var artifactInfo = active[i].GetComponent<ArtifactInfo>();
 					activeImages[i].sprite = artifactInfo.sprite;
-					//texts[i].text = artifactInfo.artifactName;
+					texts[i].text = artifactInfo.artifactName;
 				}
 				for (var i = 0; i < passive.Count; i++)
 				{

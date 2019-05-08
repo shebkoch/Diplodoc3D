@@ -9,6 +9,5 @@ namespace Structures
 		public float lastAttack;
 		public float cooldown;
 		public int damage;
-		public Sprite sprite;
 	}
 }

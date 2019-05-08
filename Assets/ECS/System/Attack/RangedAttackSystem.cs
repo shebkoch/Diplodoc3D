@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using ECS.Component;
 using ECS.Component.Attack;
 using ECS.Component.Creatures;
 using Structures;
@@ -8,15 +10,11 @@ using UnityEngine;
 
 namespace ECS.System.Attack
 {
-[DisableAutoCreation]	public class RangedAttackSystem : ComponentSystem
+	public class RangedAttackSystem : ComponentSystem
 	{
-		protected struct Creature
-		{
-			
-		}
-
 		protected override void OnUpdate()
 		{
+			List<SpawnHelper> bulletSpawnList = new List<SpawnHelper>();
 			Entities.ForEach((Entity e,
 				ref Translation translation,
 				ref RangedWeaponComponent rangedWeaponComponent,
@@ -29,44 +27,46 @@ namespace ECS.System.Attack
 				bool isAttackNeed = rangedAttackComponent.isAttackNeed;
 				bool isWeaponEnable = rangedWeaponComponent.isEnable;
 				float currentTime = Time.realtimeSinceStartup;
-				
 				if (!isAttackNeed || !isWeaponEnable || weapon.lastAttack + weapon.cooldown > currentTime) return;
-
 				weapon.lastAttack = currentTime;
 				weapon.bulletCount--;
 				if (weapon.bulletCount == 0) isWeaponEnable = false;
-				float3 direction = attackPos - position;
-				float angle = math.degrees(math.atan2(direction.y, direction.x));
-				float3 forward = new float3(0.0f, 0.0f, 1f);
 				
+				//float angle = math.degrees(math.atan2(direction.y, direction.x));
+				//float3 forward = new float3(0.0f, 0.0f, 1f);
+				
+				float2 bulletDirection = math.normalize(attackPos.xy);
 				//ECS
-				GameObject bullet = GameObject.Instantiate(weapon.bulletPrefab, position, quaternion.identity);
-				bullet.transform.rotation = Quaternion.AngleAxis(angle, forward);
-				
-				float2 result = math.normalize(direction.xy);
-				float horizontal = result.x;
-				float vertical = result.y;
 
+				SpawnHelper bulletSpawnHelper = new SpawnHelper
+				{
+					spawnPair = new SpawnPair {prefab = weapon.bulletPrefab, count = 1},
+					position = position+weapon.relativeAttackPosition,
+					needMovingComponent = true,
+					direction = bulletDirection,
+					speed = weapon.bulletSpeed
+				};
+				bulletSpawnList.Add(bulletSpawnHelper);
 				preAttackComponent.weapon = weapon;
 				preAttackComponent.isAttacked = true;
 				//ECS
-				if (!isWeaponEnable)
-				{
-					SpriteRenderer spriteRenderer = bullet.GetComponent<SpriteRenderer>();
-					spriteRenderer.sprite = weapon.sprite;
-					spriteRenderer.color = Color.white;
-					bullet.transform.localScale = float3.zero + 1;
-				}
-				var bulletMoving = bullet.GetComponent<MovingComponent>();
-				bulletMoving.vertical = vertical;
-				bulletMoving.horizontal = horizontal;
-				bulletMoving.speed = weapon.bulletSpeed;
-//				var bulletCollision = bullet.GetComponent<CollisionComponent>();
-//				bulletCollision.damage = weapon.damage;
-				
+//				if (!isWeaponEnable)
+//				{
+//					SpriteRenderer spriteRenderer = bullet.GetComponent<SpriteRenderer>();
+//					spriteRenderer.sprite = weapon.sprite;
+//					spriteRenderer.color = Color.white;
+//					bullet.transform.localScale = float3.zero + 1;
+//				}
 				rangedWeaponComponent.rangedWeapon = weapon;
 				rangedWeaponComponent.isEnable = isWeaponEnable;
 			
+			});
+			
+			Entities.ForEach((Entity e,
+				SpawnComponent spawnComponent) =>
+			{
+				spawnComponent.list.AddRange(bulletSpawnList);
+				PostUpdateCommands.SetSharedComponent(e, spawnComponent);
 			});
 		}
 	}

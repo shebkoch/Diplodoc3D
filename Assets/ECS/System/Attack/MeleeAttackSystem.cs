@@ -2,18 +2,24 @@ using ECS.Component.Attack;
 using ECS.Component.Creatures;
 using Structures;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Physics;
+using Collider = Unity.Physics.Collider;
+using Unity.Physics.Systems;
 using UnityEngine;
 
 namespace ECS.System.Attack
 {
-[DisableAutoCreation]    public class MeleeAttackSystem : ComponentSystem
+    public unsafe class MeleeAttackSystem : ComponentSystem
     {
         protected override void OnUpdate()
         {
+            float3 playerPos = GetSingleton<PlayerPosition>().position;
             Entities.ForEach((Entity e,
                 ref MeleeAttackComponent meleeAttackComponent,
                 ref MeleeWeaponComponent meleeWeaponComponent,
-                ref AnimatorComponent animator) =>
+                ref AnimatorComponent animator
+                ) =>
             {
                 MeleeWeapon weapon = meleeWeaponComponent.meleeWeapon;
                 bool isAttackNeed = meleeAttackComponent.isAttackNeed;
@@ -28,11 +34,32 @@ namespace ECS.System.Attack
                     isAnimationNeeded = true;
                 }
 
-//                if (enabled)
-//                    meleeAttackComponent.weaponCollider.gameObject.GetComponent<CollisionComponent>().damage =
-//                        weapon.damage;
+                if (enabled)
+                {
+                    float3 position = playerPos + meleeAttackComponent.colliderRelativePosition;
+                    ColliderCastInput colliderCastInput = new ColliderCastInput()
+                    {
+                        Collider = (Collider*) meleeAttackComponent.meleeCollider.GetUnsafePtr(),
+                        Position = position,
+                        Direction = position,
+                        Orientation = quaternion.identity
+                    };
+                    var physicsWorldSystem = World.Active.GetExistingSystem<BuildPhysicsWorld>();
+                    var collisionWorld = physicsWorldSystem.PhysicsWorld.CollisionWorld;
+
+                    ColliderCastHit hit = new ColliderCastHit();
+                    bool haveHit = collisionWorld.CastCollider(colliderCastInput, out hit);
+                    if (haveHit)
+                    {
+                        Entity collisionEntity = physicsWorldSystem.PhysicsWorld.Bodies[hit.RigidBodyIndex].Entity;
+                        ParametersComponent parametersComponent =
+                            EntityManager.GetComponentData<ParametersComponent>(collisionEntity);
+                        parametersComponent.health -= weapon.damage;
+                        PostUpdateCommands.SetComponent(collisionEntity, parametersComponent);
+                    }
+                }
+
                 meleeWeaponComponent.meleeWeapon = weapon;
-                meleeAttackComponent.weaponCollider.enabled = enabled;
                 animator.isAnimationNeeded = isAnimationNeeded;
             });
         }

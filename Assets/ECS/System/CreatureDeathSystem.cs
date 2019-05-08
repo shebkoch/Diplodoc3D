@@ -12,7 +12,7 @@ using Random = Unity.Mathematics.Random;
 
 namespace ECS.System
 {
-[DisableAutoCreation]	public class CreatureDeathSystem : JobComponentSystem
+	public class CreatureDeathSystem : JobComponentSystem
 	{
 		[BurstCompile]
 		struct Job : IJobForEach<ParametersComponent, DeathComponent>

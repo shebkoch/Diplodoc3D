@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace ECS.System
 {
-[DisableAutoCreation]	public class MouseControllerSystem : ComponentSystem
+	public class MouseControllerSystem : ComponentSystem
 	{	
 		protected override void OnUpdate()
 		{

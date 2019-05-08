@@ -30,10 +30,10 @@ namespace ECS.System.Attack.PreAttack
 					for (int j = -1; j <= 1; j++)
 					{
 						if(i == 0 && j == 0) continue;
-						GameObject bulletInstance = GameObject.Instantiate(weapon.bulletPrefab, position, quaternion.identity);
-						MovingComponent movingComponent = bulletInstance.GetComponent<MovingComponent>();
-						movingComponent.vertical = i;
-						movingComponent.horizontal = j;
+						//GameObject bulletInstance = GameObject.Instantiate(weapon.bulletPrefab, position, quaternion.identity);
+						//MovingComponent movingComponent = bulletInstance.GetComponent<MovingComponent>();
+						//movingComponent.vertical = i;
+						//movingComponent.horizontal = j;
 					}
 				}
 

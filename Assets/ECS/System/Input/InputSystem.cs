@@ -25,8 +25,9 @@ namespace ECS.System.Input
 				bool use1ButtonDown = UnityEngine.Input.GetKey(KeyCode.Alpha1);
 				bool use2ButtonDown = UnityEngine.Input.GetKey(KeyCode.Alpha2);
 				float3 mousePosition = UnityEngine.Input.mousePosition;
-				mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-				mousePosition.z = 0;
+				mousePosition.x -= (float) Screen.width / 2;
+				mousePosition.y -= (float) Screen.height / 2;
+				
 				bool leftDown = UnityEngine.Input.GetMouseButton(0);
 				bool rightDown = UnityEngine.Input.GetMouseButton(1);
 				MouseKeyState leftState = leftDown ? MouseKeyState.Down : MouseKeyState.Up;

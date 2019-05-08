@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,7 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -143,8 +143,8 @@
     <Compile Include="Assets\ECS\Component\Flags\CameraTagProxy.cs" />
     <Compile Include="Assets\ECS\Component\Flags\EnemyTag.cs" />
     <Compile Include="Assets\ECS\Component\Flags\EnemyTagProxy.cs" />
-    <Compile Include="Assets\ECS\Component\Flags\PlayerBulletComponent.cs" />
-    <Compile Include="Assets\ECS\Component\Flags\PlayerBulletComponentProxy.cs" />
+    <Compile Include="Assets\ECS\Component\Flags\PlayerBulletTag.cs" />
+    <Compile Include="Assets\ECS\Component\Flags\PlayerBulletTagProxy.cs" />
     <Compile Include="Assets\ECS\Component\Flags\PlayerTag.cs" />
     <Compile Include="Assets\ECS\Component\Flags\PlayerTagProxy.cs" />
     <Compile Include="Assets\ECS\Component\Items\PickUpComponent.cs" />
@@ -206,6 +206,7 @@
     <Compile Include="Assets\ECS\System\Attack\MeleeAttackSystem.cs" />
     <Compile Include="Assets\ECS\System\Attack\PreAttack\AroundShotPreAttackSystem.cs" />
     <Compile Include="Assets\ECS\System\Attack\RangedAttackSystem.cs" />
+    <Compile Include="Assets\ECS\System\BulletCollisionSystem.cs" />
     <Compile Include="Assets\ECS\System\Colision\CollisionSystem.cs" />
     <Compile Include="Assets\ECS\System\CooldownJobSystem.cs" />
     <Compile Include="Assets\ECS\System\CreatureDeathSystem.cs" />
@@ -232,7 +233,6 @@
     <Compile Include="Assets\ECS\System\RotationSystem.cs" />
     <Compile Include="Assets\ECS\System\SpawnSystem.cs" />
     <Compile Include="Assets\ECS\System\Stats\PlayerParametersStatSystem.cs" />
-    <Compile Include="Assets\ECS\System\TestCollisionSystem.cs" />
     <Compile Include="Assets\Scripts\ArtifactBoot.cs" />
     <Compile Include="Assets\Scripts\Boot.cs" />
     <Compile Include="Assets\Scripts\DictionaryExtensions.cs" />
@@ -260,9 +260,6 @@
     <Reference Include="Unity.Entities.Properties">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Entities.Properties.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Properties.Codegen">
-      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.Codegen.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Jobs">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Jobs.dll</HintPath>
     </Reference>
@@ -277,9 +274,6 @@
     </Reference>
     <Reference Include="Unity.Formats.Fbx.Editor">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Formats.Fbx.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Properties">
-      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
@@ -361,6 +355,12 @@
     </Reference>
     <Reference Include="Unity.Transforms.Hybrid">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Properties">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Properties.Reflection">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -555,7 +555,7 @@
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/PackageCache/com.unity.collections@0.0.9-preview.17/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/PackageCache/com.unity.collections@0.0.9-preview.18/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

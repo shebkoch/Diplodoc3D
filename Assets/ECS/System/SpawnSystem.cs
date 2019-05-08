@@ -39,8 +39,8 @@ namespace ECS.System
 						entityManager.SetComponentData(instance, new MovingComponent
 						{
 							speed = spawnHelper.speed,
-							vertical = spawnHelper.direction.x,
-							horizontal = spawnHelper.direction.y
+							vertical = spawnHelper.direction.y,
+							horizontal = spawnHelper.direction.x
 						});						
 
 					}

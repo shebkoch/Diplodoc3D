@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace ECS.Component.Flags
 {
-	public class PlayerBulletComponentProxy : MonoBehaviour, IConvertGameObjectToEntity
+	public class PlayerBulletTagProxy : MonoBehaviour, IConvertGameObjectToEntity
 	{
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
-			var data = new PlayerBulletComponent
+			var data = new PlayerBulletTag
 			{
 			};
 			dstManager.AddComponentData(entity, data);

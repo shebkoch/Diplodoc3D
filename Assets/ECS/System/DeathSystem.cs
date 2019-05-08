@@ -4,23 +4,27 @@ using ECS.Component.Damage;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace ECS.System
 {
-[DisableAutoCreation]	public class DeathSystem : ComponentSystem
+	public class DeathSystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{
 			Entities.ForEach((Entity e,
 				ref DeathComponent deathComponent) =>
 			{
-				if(deathComponent.isDeathNeed)
+				if (deathComponent.isDeathNeed)
+				{
 					PostUpdateCommands.DestroyEntity(e);
-			});
-			Entities.ForEach((Entity e,
-				ref PhysicsCollider physicsCollider) =>
-			{
+					var buffer = EntityManager.GetBuffer<Child>(e);
+					for (var i = 0; i < buffer.Length; i++)
+					{
+						PostUpdateCommands.DestroyEntity(buffer[i].Value);
+					}
+				}
 			});
 		}
 	}

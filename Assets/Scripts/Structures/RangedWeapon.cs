@@ -1,4 +1,6 @@
 using System;
+using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Structures
@@ -6,13 +8,13 @@ namespace Structures
 	[Serializable]
 	public struct RangedWeapon
 	{
-		public GameObject bulletPrefab;
+		public Entity bulletPrefab;
 		public float lastAttack;
 		public float cooldown;
 		public float bulletSpeed;
 		public int damage;
 		public int bulletCount;
-		public Sprite sprite;
 		public PreAttack preAttack;
+		public float3 relativeAttackPosition;
 	}
 }

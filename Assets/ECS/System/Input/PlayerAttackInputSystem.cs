@@ -5,7 +5,7 @@ using Unity.Entities;
 
 namespace ECS.System.Input
 {
-[DisableAutoCreation]	public class PlayerAttackInputSystem : ComponentSystem
+	public class PlayerAttackInputSystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{
