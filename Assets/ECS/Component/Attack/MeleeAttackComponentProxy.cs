@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Authoring;
 using UnityEngine;
@@ -8,14 +9,18 @@ namespace ECS.Component.Attack
 	
 	public class MeleeAttackComponentProxy : MonoBehaviour, IConvertGameObjectToEntity
 	{
-		public GameObject colliderObj; 
+		public GameObject colliderObj;
+		public float3 colliderRelativePosition;
+		public bool isAttackNeed;
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
 			Entity colliderEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(colliderObj, World.Active);
-//			BlobAssetReference<Collider> collider = dstManager.GetComponentData<PhysicsCollider>(colliderEntity).Value;
+			BlobAssetReference<Collider> meleeCollider = dstManager.GetComponentData<PhysicsCollider>(colliderEntity).Value;
 			var data = new MeleeAttackComponent
 			{
-//				meleeCollider = collider
+				meleeCollider = meleeCollider,
+				colliderRelativePosition = colliderRelativePosition,
+				isAttackNeed = isAttackNeed
 			};
 			dstManager.AddComponentData(entity, data);
 		}

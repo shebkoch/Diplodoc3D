@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using ECS.Component.Artifacts.Common;
 using ECS.Component.UI;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ namespace DefaultNamespace.UI
 	public class UIShowArtifacts : MonoBehaviour
 	{
 		public List<Image> activeImages;
-		public List<Text> texts;
+		public List<TextMeshProUGUI> texts;
 		public List<Image> passiveImages;
 
 		private bool isActive = false;

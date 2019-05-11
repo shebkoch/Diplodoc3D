@@ -120,6 +120,7 @@
     <Compile Include="Assets\ECS\Component\CooldownComponent.cs" />
     <Compile Include="Assets\ECS\Component\CooldownComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\AnimatorComponent.cs" />
+    <Compile Include="Assets\ECS\Component\Creatures\AnimatorComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\MovingComponent.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\MovingComponentGameObjectProxy.cs" />
     <Compile Include="Assets\ECS\Component\Creatures\MovingComponentProxy.cs" />
@@ -133,6 +134,8 @@
     <Compile Include="Assets\ECS\Component\Damage\DamageComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Damage\DeathComponent.cs" />
     <Compile Include="Assets\ECS\Component\Damage\DeathComponentProxy.cs" />
+    <Compile Include="Assets\ECS\Component\DebugComponent.cs" />
+    <Compile Include="Assets\ECS\Component\DebugComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\DurationComponent.cs" />
     <Compile Include="Assets\ECS\Component\DurationComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\Enemy\EnemyGeneratorComponent.cs" />
@@ -182,8 +185,6 @@
     <Compile Include="Assets\ECS\Component\Stats\PlayerParametersStatComponentProxy.cs" />
     <Compile Include="Assets\ECS\Component\UI\ArtifactInfo.cs" />
     <Compile Include="Assets\ECS\Component\UI\UIArtifactCooldownComponent.cs" />
-    <Compile Include="Assets\ECS\Component\UI\UIBulletComponent.cs" />
-    <Compile Include="Assets\ECS\Component\UI\UIHealthComponent.cs" />
     <Compile Include="Assets\ECS\System\AnimationSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\AroundShotSystem.cs" />
     <Compile Include="Assets\ECS\System\Artifacts\ArthurStoneSystem.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Assets\ECS\System\Stats\PlayerParametersStatSystem.cs" />
     <Compile Include="Assets\Scripts\ArtifactBoot.cs" />
     <Compile Include="Assets\Scripts\Boot.cs" />
+    <Compile Include="Assets\Scripts\CopyEntityTransform.cs" />
     <Compile Include="Assets\Scripts\DictionaryExtensions.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGeneration.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGeneration2.cs" />
@@ -253,7 +255,28 @@
     <Compile Include="Assets\Scripts\UI\UIBullet.cs" />
     <Compile Include="Assets\Scripts\UI\UIHealth.cs" />
     <Compile Include="Assets\Scripts\UI\UIShowArtifacts.cs" />
+    <None Include="Assets\Hyahhaa_GarekiTown_modelset\hyahha-readme_jp.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Hyahhaa_GarekiTown_modelset\BTAStandard_Doubleside.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Hyahhaa_GarekiTown_modelset\hyahha-readme_eng.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Models\MeleeWeapon\Read-Me.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -323,11 +346,17 @@
     <Reference Include="Unity.Mathematics">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Properties">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Physics.Editor">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Physics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Entities">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Properties.Reflection">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Transforms">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Transforms.dll</HintPath>
@@ -356,11 +385,11 @@
     <Reference Include="Unity.Transforms.Hybrid">
       <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Properties">
-      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Animation.Rigging.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Properties.Reflection">
-      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Properties.Reflection.dll</HintPath>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>C:/Users/shebk/Desktop/Projects/Projects/Diplodoc3D/Library/ScriptAssemblies/Unity.Animation.Rigging.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -402,6 +402,9 @@ GameObject:
   - component: {fileID: 3632842192804073837}
   - component: {fileID: 1837817937515224970}
   - component: {fileID: 434317116}
+  - component: {fileID: 434317108}
+  - component: {fileID: 434317109}
+  - component: {fileID: 434317110}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -566,7 +569,7 @@ MonoBehaviour:
       m_Value: 0001000000000000000000000000000000000000000000000000000000000000
     m_CollidesWith:
       m_Override: 0
-      m_Value: 0100010100010100000000000000000000000000000000000000000000000000
+      m_Value: 0100010100010000000000000000000000000000000000000000000000000000
     m_RaisesCollisionEvents:
       m_Override: 0
       m_Value: 0
@@ -585,6 +588,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d65b674c174445eb8614a97d1ee1c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &434317108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183485614801232557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e80aad77044f4c92d041fba172c080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimationNeeded: 0
+--- !u!114 &434317109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183485614801232557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20977fc50fd0449d9ced98f6006f8ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderObj: {fileID: 5187841038541667003, guid: 079a7282f8755b746bca186cbf35bc72,
+    type: 3}
+  colliderRelativePosition:
+    x: 0
+    y: 5
+    z: 2
+  isAttackNeed: 1
+--- !u!114 &434317110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183485614801232557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accfd223e2f94b2880eabeaa1b3876a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeWeapon:
+    lastAttack: 0
+    cooldown: 2
+    damage: 1
 --- !u!1 &7776561446500684670
 GameObject:
   m_ObjectHideFlags: 0

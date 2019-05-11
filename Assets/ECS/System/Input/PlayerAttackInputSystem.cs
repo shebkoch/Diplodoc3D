@@ -27,7 +27,7 @@ namespace ECS.System.Input
 				ref PlayerTag playerTag,
 				ref MeleeAttackComponent meleeAttackComponent) =>
 			{
-				meleeAttackComponent.isAttackNeed = rangedPress;
+				meleeAttackComponent.isAttackNeed = meleePress;
 			});
 
 		}

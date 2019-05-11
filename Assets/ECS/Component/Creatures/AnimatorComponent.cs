@@ -1,5 +1,4 @@
 using Unity.Entities;
-using UnityEngine;
 
 namespace ECS.Component.Creatures
 {
@@ -9,5 +8,4 @@ namespace ECS.Component.Creatures
 		//public string attackAnimation;
 		public bool isAnimationNeeded;
 	}
-	
 }

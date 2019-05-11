@@ -1,5 +1,8 @@
 using ECS.Component.Attack;
+using ECS.Component.Flags;
 using ECS.Component.UI;
+using TMPro;
+using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,19 +10,12 @@ namespace UI
 {
 	public class UIBullet : MonoBehaviour
 	{
-		public UIBulletComponent bulletComponent;
-
-		private Text bulletText;
-		public RangedWeaponComponent rangedWeaponComponent;
-
-		private void Start()
-		{
-			bulletText = bulletComponent.bulletCountText;
-		}
+		public TextMeshProUGUI bulletCountText;
 
 		private void Update()
 		{
-			bulletText.text = rangedWeaponComponent.rangedWeapon.bulletCount.ToString();
+			int bulletCount = World.Active.EntityManager.GetComponentData<RangedWeaponComponent>(PlayerTagProxy.playerEntity).rangedWeapon.bulletCount;
+			bulletCountText.text = bulletCount.ToString();
 		}
 	}
 }

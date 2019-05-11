@@ -5,8 +5,11 @@ namespace ECS.Component.Flags
 {
 	public class PlayerTagProxy : MonoBehaviour, IConvertGameObjectToEntity
 	{
+		public static Entity playerEntity;
+
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
+			playerEntity = entity;
 			var data = new PlayerTag
 			{
 			};
