@@ -1,5 +1,4 @@
 using Structures;
-using UnityEngine;
 using Unity.Entities;
 
 namespace ECS.Component.Items

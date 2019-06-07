@@ -60,6 +60,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 124409095729163344, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: cooldown
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 68105834f69da4d4381317e462269b7d,
+        type: 3}
+    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: artifactName
+      value: Freeze
+      objectReference: {fileID: 0}
     - target: {fileID: 5952042003093282157, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -114,22 +130,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 124409095729163344, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: cooldown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d374ceee2cb150f4b95b1bc4502043b2,
-        type: 3}
-    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: artifactName
-      value: "\u041C\u0435\u0434\u0443\u0437\u0430"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e0252ad01a42bb4a913c5d95864fcfa, type: 3}

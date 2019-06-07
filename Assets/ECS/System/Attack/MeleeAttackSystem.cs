@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using ECS.Component;
 using ECS.Component.Attack;
 using ECS.Component.Creatures;
 using Structures;
@@ -15,7 +15,7 @@ namespace ECS.System.Attack
 {
     public unsafe class MeleeAttackSystem : ComponentSystem
     {
-        public static ColliderCastInput castInput;
+        
         protected override void OnUpdate()
         {
             Entities.ForEach((Entity e,
@@ -29,7 +29,7 @@ namespace ECS.System.Attack
                 MeleeWeapon weapon = meleeWeaponComponent.meleeWeapon;
                 bool isAttackNeed = meleeAttackComponent.isAttackNeed;
                 float currentTime = Time.realtimeSinceStartup;
-                bool isAnimationNeeded = animator.isAnimationNeeded;
+                bool isAnimationNeeded = false;
                 bool enabled = false;
 
                 if (isAttackNeed && weapon.lastAttack + weapon.cooldown <= currentTime)
@@ -49,29 +49,28 @@ namespace ECS.System.Attack
                         Direction = new float3(0,0,-1),
                         Orientation = rotation.Value
                     };
-                    castInput = colliderCastInput;
+                    
                     var physicsWorldSystem = World.Active.GetExistingSystem<BuildPhysicsWorld>();
                     var collisionWorld = physicsWorldSystem.PhysicsWorld.CollisionWorld;
 
                     NativeList<ColliderCastHit> colliderCastHits =
-                        new NativeList<ColliderCastHit>(Allocator.Persistent);
-
+                        new NativeList<ColliderCastHit>(Allocator.Temp);
                     collisionWorld.CastCollider(colliderCastInput, ref colliderCastHits);
-
+                    
                     for (var i = 0; i < colliderCastHits.Length; i++)
                     {
-                        Debug.Log("fe");
                         var colliderCastHit = colliderCastHits[i];
                         Entity collisionEntity = physicsWorldSystem.PhysicsWorld.Bodies[colliderCastHit.RigidBodyIndex].Entity;
-                        ParametersComponent parametersComponent =
-                            EntityManager.GetComponentData<ParametersComponent>(collisionEntity);
-                        parametersComponent.health -= weapon.damage;
-                        PostUpdateCommands.SetComponent(collisionEntity, parametersComponent);
+                        DamageReceivedComponent damageReceivedComponent =
+                            EntityManager.GetComponentData<DamageReceivedComponent>(collisionEntity);
+                        
+                        damageReceivedComponent.damage += weapon.damage;
+                        EntityManager.SetComponentData(collisionEntity, damageReceivedComponent);
                     }                    
                 }
 
                 meleeWeaponComponent.meleeWeapon = weapon;
-                animator.isAnimationNeeded = isAnimationNeeded;
+                animator.isAttackNeeded = isAnimationNeeded;
             });
         }
     }

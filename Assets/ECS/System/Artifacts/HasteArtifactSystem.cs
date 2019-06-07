@@ -1,16 +1,13 @@
-using System;
 using ECS.Component;
 using ECS.Component.Artifacts;
 using ECS.Component.Artifacts.Util;
 using ECS.Component.Creatures;
 using ECS.Component.Flags;
 using Unity.Entities;
-using Unity.Mathematics;
-using UnityEngine;
 
 namespace ECS.System.Artifacts
 {
-[DisableAutoCreation]	public class HasteArtifactSystem : ComponentSystem
+	public class HasteArtifactSystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{

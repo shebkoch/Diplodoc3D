@@ -1,4 +1,3 @@
-using ECS.Component;
 using ECS.Component.Creatures;
 using ECS.Component.Flags;
 using Unity.Entities;
@@ -6,7 +5,6 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace ECS.System
 {
@@ -30,6 +28,7 @@ namespace ECS.System
 					Direction = translation.Value,
 					Orientation = quaternion.identity
 				};
+				
 				ColliderCastHit hit = new ColliderCastHit();
 				bool haveHit = collisionWorld.CastCollider(colliderCastInput, out hit);
 				if (haveHit)

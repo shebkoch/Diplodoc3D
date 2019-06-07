@@ -1,5 +1,4 @@
 using ECS.Component.Creatures;
-using ECS.Component.Flags;
 using ECS.Component.Relations;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -12,26 +11,26 @@ namespace ECS.System.Relations
 		protected override void OnUpdate()
 		{
 			float3 position = GetSingleton<PlayerPosition>().position;
-
+	
 			Entities.ForEach((Entity e,
 				ref PlayerFollowComponent playerFollowComponent,
 				ref Translation translation,
 				ref MovingComponent movingComponent) =>
 			{
-				float3 enemyPosition = translation.Value;
+				float3 followerPosition = translation.Value;
 				float offset = playerFollowComponent.offset;
 				bool offsetEnable = playerFollowComponent.offsetEnable;
 				
 				float horizontal = 0;
 				float vertical = 0;
-				float distance = math.distance(position.xz, enemyPosition.xz);
+				float distance = math.distance(position.xz, followerPosition.xz);
 				if (!offsetEnable || distance > offset)
 				{
-					float2 result = math.normalize(position.xz - enemyPosition.xz);
+					float2 result = math.normalize(position.xz - followerPosition.xz);
 					horizontal = result.x;
 					vertical = result.y;
 				}
-
+	
 				playerFollowComponent.distanceToPlayer = distance;
 				movingComponent.vertical = vertical;
 				movingComponent.horizontal = horizontal;

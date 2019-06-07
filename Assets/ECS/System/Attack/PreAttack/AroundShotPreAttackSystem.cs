@@ -1,11 +1,8 @@
 using ECS.Component.Attack;
 using ECS.Component.Creatures;
-using ECS.Component.Flags;
 using Structures;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Transforms;
-using UnityEngine;
 
 namespace ECS.System.Attack.PreAttack
 {

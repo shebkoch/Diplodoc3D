@@ -1,5 +1,4 @@
 using Unity.Entities;
-using UnityEngine.UI;
 
 namespace ECS.Component.Modificators
 {

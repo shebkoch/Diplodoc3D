@@ -1,6 +1,5 @@
 using System;
 using Unity.Mathematics;
-using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 public static class Rand
@@ -17,12 +16,15 @@ public static class Rand
 		return randomPos;
 	}
 
-	//to math rand
+	public static float3 OnCircle3D(Random random, float y, float3 radius, float min, float max)
+	{
+		float2 circleNormalized = random.NextFloat2Direction();
+		float3 randomPos = new float3(circleNormalized.x, y, circleNormalized.y) * (radius + 
+		                                                                            random.NextFloat(-min,max));
+		return randomPos;	
+	}
 	public static float3 OnCircle3D(float y, float3 radius, float min, float max)
 	{
-		float2 circleNormalized = UnityEngine.Random.insideUnitCircle.normalized;
-		float3 randomPos = new float3(circleNormalized.x, y, circleNormalized.y) * (radius + 
-		                                                                                    UnityEngine.Random.Range(-min,max));
-		return randomPos;
+		return OnCircle3D(GetRandom(), y, radius, min, max);
 	}
 }

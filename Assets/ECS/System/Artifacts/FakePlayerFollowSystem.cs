@@ -8,7 +8,6 @@ using ECS.System.Relations;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace ECS.System.Artifacts

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using ECS.Component;
-using ECS.Component.Creatures;
+using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Transforms;
 using UnityEngine;
 
 namespace ECS.System
@@ -11,41 +9,50 @@ namespace ECS.System
 	//TODO : to job
 	public class SpawnSystem : ComponentSystem
 	{
-
 		protected override void OnUpdate()
 		{
 			List<SpawnHelper> list = new List<SpawnHelper>();
+			Entity spawnEntity = Entity.Null;
+			SpawnComponent _spawnComponent = new SpawnComponent();
 			Entities.ForEach((Entity e,
 				SpawnComponent spawnComponent) =>
 			{
 				list = spawnComponent.list;
 				spawnComponent.list = new List<SpawnHelper>();
-				PostUpdateCommands.SetSharedComponent(e, spawnComponent);
+				spawnEntity = e;
 			});
-			var entityManager = World.Active.EntityManager;
+			EntityManager.SetSharedComponentData(spawnEntity, _spawnComponent);
+			
 			foreach (var spawnHelper in list)
 			{
-				for (int i = 0; i < spawnHelper.spawnPair.count; i++)
+				if (spawnHelper.hybrid)
 				{
-					Entity instance = entityManager.Instantiate(spawnHelper.spawnPair.prefab);
-					float3 position = spawnHelper.position;
-					if (spawnHelper.needSpread)
-					{
-						position = Rand.OnCircle3D(0, spawnHelper.radius, -spawnHelper.spread, spawnHelper.spread) + position;
-					}
-					entityManager.SetComponentData(instance, new Translation {Value = position});
-					if (spawnHelper.needMovingComponent)
-					{
-						entityManager.SetComponentData(instance, new MovingComponent
-						{
-							speed = spawnHelper.speed,
-							vertical = spawnHelper.direction.y,
-							horizontal = spawnHelper.direction.x
-						});						
+					Entity entity = spawnHelper.hybridSpawnPair.entity;
+					int length = spawnHelper.hybridSpawnPair.count;
 
-					}
+					NativeList<Entity> entityList = Instantiate(spawnHelper.prefabComponent, entity, length);
+
+					for (int i = 0; i < length; i++)
+					{
+						GameObject gameObject = GameObject.Instantiate(spawnHelper.hybridSpawnPair.gameObject);
+						gameObject.GetComponent<CopyEntityTransform>().entity = entityList[i];
+					}					
 				}
+				else
+					Instantiate(spawnHelper.prefabComponent, spawnHelper.spawnPair.prefab, spawnHelper.spawnPair.count);
 			}
+		}
+
+		private NativeList<Entity> Instantiate(PrefabComponent prefabComponent, Entity entity, int length)
+		{
+			NativeList<Entity> entityList = new NativeList<Entity>(Allocator.Temp);
+			entityList.ResizeUninitialized(length);
+			EntityManager.Instantiate(entity, entityList);
+			
+			for (var i = 0; i < entityList.Length; i++)
+				PostUpdateCommands.AddComponent(entityList[i], prefabComponent);
+
+			return entityList;
 		}
 	}
 }

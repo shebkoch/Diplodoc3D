@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 
@@ -10,20 +9,21 @@ namespace ECS.Component.Enemy
 		public int breakAfter;
 		public int wavePlus;
 		public int spread;
-		public List<SpawnPairProxy> enemies;
+		public List<HybridSpawnPairProxy> enemies;
 		
-
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
-			List<SpawnPair> enemiesEntity = new List<SpawnPair>();
-			foreach (var enemy in enemies) enemiesEntity.Add(enemy.Convert(conversionSystem));
-			
+			List<HybridSpawnPair> list = new List<HybridSpawnPair>();
+			foreach (var hybridSpawnPair in enemies)
+			{
+				list.Add(hybridSpawnPair.Convert());
+			}
 			var data = new EnemyGeneratorComponent
 			{
 				breakAfter = breakAfter,
 				wavePlus = wavePlus,
 				countSpread = spread,
-				enemies = enemiesEntity
+				enemies = list
 			};
 			dstManager.AddSharedComponentData(entity, data);
 		}

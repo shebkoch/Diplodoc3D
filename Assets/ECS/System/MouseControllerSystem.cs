@@ -1,10 +1,8 @@
-using ECS.Component;
 using ECS.Component.Attack;
 using ECS.Component.Flags;
 using ECS.Component.Settings;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace ECS.System
 {

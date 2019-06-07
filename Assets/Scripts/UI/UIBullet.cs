@@ -1,10 +1,8 @@
 using ECS.Component.Attack;
 using ECS.Component.Flags;
-using ECS.Component.UI;
 using TMPro;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {

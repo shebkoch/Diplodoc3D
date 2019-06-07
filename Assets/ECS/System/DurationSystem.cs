@@ -1,12 +1,8 @@
 using ECS.Component;
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Transforms;
 using UnityEngine;
-using Random = Unity.Mathematics.Random;
 
 namespace ECS.System
 {

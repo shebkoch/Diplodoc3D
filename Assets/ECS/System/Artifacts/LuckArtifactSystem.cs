@@ -1,8 +1,6 @@
-using ECS.Component;
 using ECS.Component.Artifacts;
 using ECS.Component.Artifacts.Common;
 using ECS.Component.Artifacts.Util;
-using ECS.Component.UI;
 using Unity.Entities;
 
 namespace ECS.System.Artifacts

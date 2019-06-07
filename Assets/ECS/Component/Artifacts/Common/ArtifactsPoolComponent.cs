@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;using Unity.Entities;
+using UnityEngine;
 
 namespace ECS.Component.Artifacts.Common
 {

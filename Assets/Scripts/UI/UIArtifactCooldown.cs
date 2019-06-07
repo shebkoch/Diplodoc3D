@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using ECS.Component;
-using ECS.Component.Artifacts.Common;
 using ECS.Component.UI;
 using Unity.Entities;
 using UnityEngine;

@@ -4,8 +4,6 @@ using ECS.Component.Artifacts.Common;
 using ECS.Component.Creatures;
 using ECS.Component.Flags;
 using Unity.Entities;
-using Unity.Mathematics;
-using UnityEngine;
 
 namespace ECS.System.Artifacts
 {

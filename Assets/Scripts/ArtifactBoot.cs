@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using DefaultNamespace.UI;
 using ECS.Component.Artifacts.Common;
 using ECS.Component.UI;
 using Unity.Entities;

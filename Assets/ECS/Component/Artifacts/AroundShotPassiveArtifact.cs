@@ -1,16 +1,13 @@
-using ECS.Component.Stats;
-using ECS.System.Stats;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
-using Unity.Entities;
 
 namespace ECS.Component.Artifacts
 {
-	public struct AroundShotPassiveArtifact : ISharedComponentData
+	public struct AroundShotPassiveArtifact : IComponentData
 	{
 		public Entity bullet;
 		public float speed;
+		public float3 relativePosition;
 		public int2 bulletCount;
 	}
 }

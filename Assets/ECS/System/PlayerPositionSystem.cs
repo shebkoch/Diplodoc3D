@@ -1,13 +1,9 @@
-using ECS.Component;
 using ECS.Component.Creatures;
 using ECS.Component.Flags;
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace ECS.System
 {

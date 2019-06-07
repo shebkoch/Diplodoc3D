@@ -1,11 +1,7 @@
-using System.Collections.Generic;
-using ECS.Component;
 using ECS.Component.Damage;
+using ECS.Component.Flags;
 using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Physics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace ECS.System
 {
@@ -13,19 +9,30 @@ namespace ECS.System
 	{
 		protected override void OnUpdate()
 		{
+			int enemyDeathCount = 0;
 			Entities.ForEach((Entity e,
 				ref DeathComponent deathComponent) =>
-			{
+			{				
 				if (deathComponent.isDeathNeed)
 				{
+					if (EntityManager.HasComponent(e, typeof(EnemyTag)))
+						enemyDeathCount++;
+					
 					PostUpdateCommands.DestroyEntity(e);
-					var buffer = EntityManager.GetBuffer<Child>(e);
-					for (var i = 0; i < buffer.Length; i++)
+
+					if (EntityManager.HasComponent<Child>(e))
 					{
-						PostUpdateCommands.DestroyEntity(buffer[i].Value);
+						var buffer = EntityManager.GetBuffer<Child>(e);
+						for (var i = 0; i < buffer.Length; i++)
+						{
+							PostUpdateCommands.DestroyEntity(buffer[i].Value);
+						}
 					}
 				}
 			});
+			DeathCountComponent deathCountComponent = GetSingleton<DeathCountComponent>();
+			deathCountComponent.count += enemyDeathCount;
+			SetSingleton(deathCountComponent);
 		}
 	}
 }

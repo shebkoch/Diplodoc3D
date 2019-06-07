@@ -6,7 +6,7 @@ namespace ECS.Component
 {
 	public class SpawnComponentProxy : MonoBehaviour, IConvertGameObjectToEntity
 	{
-		public List<SpawnHelper> list;
+		public List<SpawnHelper> list = new List<SpawnHelper>();
 
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{

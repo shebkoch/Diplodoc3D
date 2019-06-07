@@ -1,4 +1,4 @@
-using UnityEngine;using Unity.Entities;
+using Unity.Entities;
 using Unity.Mathematics;
 using Collider = Unity.Physics.Collider;
 

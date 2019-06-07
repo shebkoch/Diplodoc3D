@@ -2,8 +2,6 @@ using ECS.Component;
 using ECS.Component.Artifacts.Call;
 using ECS.Component.Damage;
 using Unity.Entities;
-using Unity.Mathematics;
-using UnityEngine;
 
 namespace ECS.System.Artifacts.Call
 {

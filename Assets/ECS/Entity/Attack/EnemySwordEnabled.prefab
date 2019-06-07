@@ -61,11 +61,11 @@ MonoBehaviour:
   m_PrimitiveCenter:
     x: 0
     y: 0
-    z: 0
+    z: 2
   m_PrimitiveSize:
     x: 10
-    y: 10
-    z: 4
+    y: 5
+    z: 9
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -74,12 +74,12 @@ MonoBehaviour:
     RotationOrder: 4
   m_Capsule:
     Height: 10
+    Radius: 4.5
+    Axis: 0
+  m_Cylinder:
+    Height: 5
     Radius: 5
     Axis: 1
-  m_Cylinder:
-    Height: 4
-    Radius: 5
-    Axis: 2
   m_SphereRadius: 5
   m_ConvexRadius: 0
   m_CustomMesh: {fileID: 0}

@@ -6,6 +6,8 @@ namespace ECS.Component.Creatures
 	{
 		//public Animator animator;
 		//public string attackAnimation;
-		public bool isAnimationNeeded;
+		public bool isAttackNeeded;
+		public bool run;
+		public bool isDeathNeeded;
 	}
 }

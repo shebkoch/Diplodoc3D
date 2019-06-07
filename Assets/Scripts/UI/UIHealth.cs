@@ -1,6 +1,5 @@
 using ECS.Component.Creatures;
 using ECS.Component.Flags;
-using ECS.Component.UI;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,12 +1,8 @@
-using System;
-using ECS.Component;
 using ECS.Component.Artifacts;
 using ECS.Component.Flags;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace ECS.System.Artifacts
 {

@@ -1,9 +1,6 @@
-using ECS.Component;
 using ECS.Component.Creatures;
 using ECS.Component.Damage;
 using Unity.Entities;
-using Unity.Mathematics;
-using UnityEngine;
 
 namespace ECS.System
 {

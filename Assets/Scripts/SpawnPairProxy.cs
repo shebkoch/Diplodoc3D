@@ -1,5 +1,4 @@
 using System;
-using Unity.Entities;
 using UnityEngine;
 
 [Serializable]
@@ -12,7 +11,7 @@ public class SpawnPairProxy
 	{
 		var data = new SpawnPair
 		{
-			prefab =  GameObjectConversionUtility.ConvertGameObjectHierarchy(prefab, World.Active),
+			prefab =  prefab,
 			count = count
 		};
 		return data;

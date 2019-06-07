@@ -5,7 +5,6 @@ using ECS.Component.Flags;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace ECS.System.Artifacts.Call
 {

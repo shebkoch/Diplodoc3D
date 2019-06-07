@@ -15,11 +15,7 @@ namespace MapGeneration
 		public int triangleCount;
 		public List<Triangle> triangles;
 
-		private void Update()
-		{
-			if (Input.GetKey(KeyCode.R)) Application.LoadLevel(0);
-		}
-
+	
 		private void Start()
 		{
 			for (var i = 0; i < innerBoundSize; i++) PlotBound(i, map - i);

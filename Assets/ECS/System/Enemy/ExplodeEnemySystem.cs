@@ -1,3 +1,4 @@
+using ECS.Component;
 using ECS.Component.Creatures;
 using ECS.Component.Damage;
 using ECS.Component.Enemy;
@@ -6,11 +7,12 @@ using ECS.Component.Relations;
 using ECS.System.Relations;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace ECS.System.Enemy
 {
 	[UpdateAfter(typeof(PlayerFollowSystem))]
-[DisableAutoCreation]	public class ExplodeEnemySystem : ComponentSystem
+	public class ExplodeEnemySystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{
@@ -19,7 +21,7 @@ namespace ECS.System.Enemy
 				ref EnemyTag enemyTag,
 				ref ExplodeEnemyComponent explodeEnemyComponent,
 				ref PlayerFollowComponent playerFollowComponent,
-				ref DeathComponent deathComponent ) =>
+				ref ParametersComponent parametersComponent) =>
 			{
 				float explodeDistance = explodeEnemyComponent.distance;
 				float distanceToPlayer = playerFollowComponent.distanceToPlayer;
@@ -28,14 +30,14 @@ namespace ECS.System.Enemy
 				if (math.abs(distanceToPlayer) < math.abs(explodeDistance))
 				{
 					damage += explodeDamage;
-					deathComponent.isDeathNeed = true;
+					parametersComponent.health -= 100;
 				}
 			});
 			Entities.ForEach((Entity e,
 				ref PlayerTag playerTag,
-				ref ParametersComponent parametersComponent) =>
+				ref DamageReceivedComponent damageReceivedComponent) =>
 			{
-				parametersComponent.health -= damage;
+				damageReceivedComponent.damage += damage;
 			});
 		}
 	}

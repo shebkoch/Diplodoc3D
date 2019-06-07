@@ -10,7 +10,7 @@ namespace ECS.Component.Creatures
 		{
 			var data = new AnimatorComponent
 			{
-				isAnimationNeeded = isAnimationNeeded,
+				isAttackNeeded = isAnimationNeeded,
 			};
 			dstManager.AddComponentData(entity, data);
 		}

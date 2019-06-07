@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using ECS.Component.Artifacts.Common;
 using ECS.Component.UI;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,7 @@ namespace DefaultNamespace.UI
 		public List<Image> activeImages;
 		public List<TextMeshProUGUI> texts;
 		public List<Image> passiveImages;
+		public List<TextMeshProUGUI> passiveTexts;
 
 		private bool isActive = false;
 		private void Update()
@@ -31,17 +31,19 @@ namespace DefaultNamespace.UI
 				List<GameObject> passive = artifactsPoolComponent.passive;
 				if(active == null || active.Count == 0) return;
 
-				for (var i = 0; i < active.Count; i++)
-				{
-					var artifactInfo = active[i].GetComponent<ArtifactInfo>();
-					activeImages[i].sprite = artifactInfo.sprite;
-					texts[i].text = artifactInfo.artifactName;
-				}
-				for (var i = 0; i < passive.Count; i++)
-				{
-					passiveImages[i].sprite = passive[i].GetComponent<ArtifactInfo>().sprite;
-				}
+				ShowArtifact(active, texts, activeImages);
+				ShowArtifact(passive, passiveTexts, passiveImages);
 				isActive = true;
+			}
+		}
+
+		private void ShowArtifact(List<GameObject> gameObjects, List<TextMeshProUGUI> texts, List<Image> images)
+		{
+			for (var i = 0; i < gameObjects.Count; i++)
+			{
+				var artifactInfo = gameObjects[i].GetComponent<ArtifactInfo>();
+				images[i].sprite = artifactInfo.sprite;
+				texts[i].text = artifactInfo.artifactName;	
 			}
 		}
 	}

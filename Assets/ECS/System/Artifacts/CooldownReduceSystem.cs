@@ -1,7 +1,6 @@
 using ECS.Component;
 using ECS.Component.Artifacts;
 using Unity.Entities;
-using NotImplementedException = System.NotImplementedException;
 
 namespace ECS.System.Artifacts
 {

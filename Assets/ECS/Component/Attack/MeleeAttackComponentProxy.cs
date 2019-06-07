@@ -1,7 +1,6 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
-using Unity.Physics.Authoring;
 using UnityEngine;
 using Collider = Unity.Physics.Collider;
 namespace ECS.Component.Attack

@@ -1,3 +1,4 @@
+using System;
 using ECS.Component.Creatures;
 using Unity.Burst;
 using Unity.Collections;
@@ -5,6 +6,7 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
+using static System.Single;
 
 namespace ECS.System
 {
@@ -19,6 +21,8 @@ namespace ECS.System
 				float horizontal = movingComponent.horizontal;
 				float vertical = movingComponent.vertical;
 			
+				if(Math.Abs(horizontal) < Epsilon && Math.Abs(vertical) < Epsilon) return;
+				
 				rotation.Value = quaternion.LookRotation(new float3(horizontal,0 ,vertical+0.001f), math.up());
 			}
 		}

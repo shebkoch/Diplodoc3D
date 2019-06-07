@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using ECS.Component;
-using ECS.Component.Artifacts;
 using ECS.Component.Enemy;
 using ECS.Component.Flags;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace ECS.System.Enemy
@@ -24,9 +21,9 @@ namespace ECS.System.Enemy
 			{
 				playerPos = translation.Value;
 			});
-			
+
 			List<SpawnHelper> spawnHelpers = new List<SpawnHelper>();
-			
+
 			Entities.ForEach((Entity e,
 				EnemyGeneratorComponent enemyGeneratorComponent,
 				ref CooldownComponent cooldownComponent,
@@ -34,7 +31,8 @@ namespace ECS.System.Enemy
 			{
 				bool canUse = cooldownComponent.canUse;
 				if (!canUse) return;
-				List<SpawnPair> enemies = enemyGeneratorComponent.enemies;
+				List<HybridSpawnPair> enemies = enemyGeneratorComponent.enemies;
+				
 				int wave = enemyGeneratorComponent.wave;
 				int breakAfter = enemyGeneratorComponent.breakAfter;
 				int spread = enemyGeneratorComponent.countSpread;
@@ -44,40 +42,36 @@ namespace ECS.System.Enemy
 				{
 					for (var i = 0; i < enemies.Count; i++)
 					{
-						var spawnPair = enemies[i];
-						float relativeSpread = (float) spread / spawnPair.count;
-						int count = spawnPair.count + wave * wavePlus;
+						var hybridSpawnPair = enemies[i];
+						float relativeSpread = (float) spread / hybridSpawnPair.count;
+						int plus = wavePlus * wave;
+						if (i == 0) plus /= 10;
+						int count = hybridSpawnPair.count + plus;
 						count += (int) Random.Range(-count * relativeSpread, count * relativeSpread);
-
+						hybridSpawnPair.count = count;
+						
 						spawnHelpers.Add(new SpawnHelper()
 						{
-							spawnPair = new SpawnPair()
+							hybrid = true,
+							hybridSpawnPair = hybridSpawnPair,
+							prefabComponent = new PrefabComponent
 							{
-								count = count,
-								prefab = spawnPair.prefab
-							},
-							position = playerPos,
-							needSpread = true,
-							spread = enemyGeneratorComponent.countSpread,
-							radius = radius
+								position = playerPos,
+								needSpread = true,
+								positionSpread = enemyGeneratorComponent.positionSpread,
+								spread = enemyGeneratorComponent.countSpread,
+								radius = radius
+							}
 						});
 					}
 				}
+
 				enemyGeneratorComponent.wave = wave + 1;
 				PostUpdateCommands.SetSharedComponent(e, enemyGeneratorComponent);
 				cooldownComponent.isReloadNeeded = true;
 			});
 
-			Entities.ForEach((Entity e,
-				SpawnComponent spawnComponent) =>
-			{
-				spawnComponent.list.AddRange(spawnHelpers);
-				PostUpdateCommands.SetSharedComponent(e, spawnComponent);
-			});
-			
+			SpawnAdder.Add(spawnHelpers, EntityManager, Entities);
 		}
-		
-		
-
 	}
 }

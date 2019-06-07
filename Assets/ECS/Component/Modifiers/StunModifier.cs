@@ -1,5 +1,4 @@
-using Unity.Mathematics;
-using UnityEngine;using Unity.Entities;
+using Unity.Entities;
 
 namespace ECS.Component.Modifiers
 {

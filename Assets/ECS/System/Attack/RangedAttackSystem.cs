@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using ECS.Component;
 using ECS.Component.Attack;
-using ECS.Component.Creatures;
 using Structures;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -31,20 +30,23 @@ namespace ECS.System.Attack
 				weapon.lastAttack = currentTime;
 				weapon.bulletCount--;
 				if (weapon.bulletCount == 0) isWeaponEnable = false;
-				
+
 				//float angle = math.degrees(math.atan2(direction.y, direction.x));
 				//float3 forward = new float3(0.0f, 0.0f, 1f);
-				
+
 				float2 bulletDirection = math.normalize(attackPos.xy);
 				//ECS
 
 				SpawnHelper bulletSpawnHelper = new SpawnHelper
 				{
-					spawnPair = new SpawnPair {prefab = weapon.bulletPrefab, count = 1},
-					position = position+weapon.relativeAttackPosition,
-					needMovingComponent = true,
-					direction = bulletDirection,
-					speed = weapon.bulletSpeed
+					spawnPair = new EntitySpawnPair {prefab = weapon.bulletPrefab, count = 1},
+					prefabComponent = new PrefabComponent
+					{
+						position = position + weapon.relativeAttackPosition,
+						needMovingComponent = true,
+						direction = bulletDirection,
+						speed = weapon.bulletSpeed
+					}
 				};
 				bulletSpawnList.Add(bulletSpawnHelper);
 				preAttackComponent.weapon = weapon;
@@ -59,15 +61,9 @@ namespace ECS.System.Attack
 //				}
 				rangedWeaponComponent.rangedWeapon = weapon;
 				rangedWeaponComponent.isEnable = isWeaponEnable;
-			
 			});
-			
-			Entities.ForEach((Entity e,
-				SpawnComponent spawnComponent) =>
-			{
-				spawnComponent.list.AddRange(bulletSpawnList);
-				PostUpdateCommands.SetSharedComponent(e, spawnComponent);
-			});
+
+			SpawnAdder.Add(bulletSpawnList, EntityManager, Entities);
 		}
 	}
 }

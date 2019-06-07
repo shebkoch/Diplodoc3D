@@ -2,7 +2,6 @@ using ECS.Component.Creatures;
 using ECS.Component.Modificators;
 using ECS.System.Relations;
 using Unity.Entities;
-using Unity.Transforms;
 using UnityEngine;
 
 namespace ECS.System.Modifiers

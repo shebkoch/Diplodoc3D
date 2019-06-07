@@ -1,13 +1,16 @@
+using ECS.Component;
 using ECS.Component.Artifacts.Util;
-using ECS.Component.Stats;
-using ECS.System.Stats;
+using ECS.Component.Flags;
+using ECS.System.Attack;
 using Unity.Entities;
+using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace ECS.System.Artifacts.Util
 {
-	[UpdateAfter(typeof(PlayerParametersStatSystem))]
-[DisableAutoCreation]	public class ChanceByHpLoseSystem : ComponentSystem
+	[UpdateBefore(typeof(DamageReceivedSystem))]
+	[UpdateAfter(typeof(MeleeAttackSystem))]
+	public class ChanceByHpLoseSystem : ComponentSystem
 	{
 		protected override void OnUpdate()
 		{
@@ -15,11 +18,11 @@ namespace ECS.System.Artifacts.Util
 			int lastReceived = 0;
 
 			Entities.ForEach((Entity e,
-				ref PlayerParametersStatComponent playerParametersStatComponent) =>
+				ref PlayerTag playerTag,
+				ref DamageReceivedComponent damageReceivedComponent) =>
 			{
-				lastReceived = playerParametersStatComponent.lastReceived;				
+				lastReceived = damageReceivedComponent.damage;				
 			});
-			
 			Entities.ForEach((Entity e,
 				ref ChanceByHpLoseComponent chanceByHpLoseComponent,
 				ref ChanceArtifactComponent chanceArtifactComponent) =>

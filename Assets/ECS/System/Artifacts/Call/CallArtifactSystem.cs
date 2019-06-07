@@ -3,17 +3,17 @@ using ECS.Component;
 using ECS.Component.Artifacts.Call;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace ECS.System.Artifacts.Call
 {
-	
-[DisableAutoCreation]	public class CallArtifactSystem : ComponentSystem
+	[DisableAutoCreation]
+	public class CallArtifactSystem : ComponentSystem
 	{
 		protected struct Artifact
 		{
 			public CallArtifactComponent callArtifactComponent;
 		}
+
 		protected override void OnUpdate()
 		{
 			List<SpawnHelper> spawnHelpers = new List<SpawnHelper>();
@@ -21,38 +21,32 @@ namespace ECS.System.Artifacts.Call
 				CallArtifactComponent callArtifactComponent) =>
 			{
 				bool isCallNeeded = callArtifactComponent.isCallNeeded;
-				if(!isCallNeeded) return;
+				if (!isCallNeeded) return;
 
 				int count = callArtifactComponent.count;
-				Entity gameObject = callArtifactComponent.calling;
+				Entity prefab = callArtifactComponent.calling;
 				float3 position = callArtifactComponent.position;
-				
+
 				spawnHelpers.Add(
 					new SpawnHelper
 					{
-						spawnPair = new SpawnPair{prefab = gameObject, count = count},
-						position = position,
+						spawnPair = new EntitySpawnPair {prefab = prefab, count = count},
+						prefabComponent = new PrefabComponent()
+						{
+							position = position
+						},
 					});
-				
+
 				callArtifactComponent.isCallNeeded = false;
-				PostUpdateCommands.SetSharedComponent(e,callArtifactComponent);
+				PostUpdateCommands.SetSharedComponent(e, callArtifactComponent);
 			});
-			
+
 			Entities.ForEach((Entity e,
 				SpawnComponent spawnComponent) =>
 			{
 				spawnComponent.list.AddRange(spawnHelpers);
-				PostUpdateCommands.SetSharedComponent(e, spawnComponent);
+				EntityManager.SetSharedComponentData(e, spawnComponent);
 			});
-			
 		}
-		
-
-		
-		
-	
-		
-		
-		
 	}
 }

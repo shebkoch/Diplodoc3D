@@ -38,6 +38,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowDown Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 124409095729163344, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: cooldown
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0d6c620cbdc41704fa0e18dbf8ee70c1,
+        type: 3}
+    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: artifactName
+      value: Time slow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952799486482712505, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
+        type: 3}
+      propertyPath: canUse
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5952042003093282157, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -92,27 +113,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952799486482712505, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: canUse
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 124409095729163344, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: cooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 846a75feaf20ba645b2e274de904cd65,
-        type: 3}
-    - target: {fileID: 3214953836941155252, guid: 1e0252ad01a42bb4a913c5d95864fcfa,
-        type: 3}
-      propertyPath: artifactName
-      value: "\u0417\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u0435"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e0252ad01a42bb4a913c5d95864fcfa, type: 3}
